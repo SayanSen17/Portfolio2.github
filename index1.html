@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayan Sen | Software Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'primary': '#8B4513',
+                        'primary-light': '#A0522D',
+                        'primary-dark': '#5D2906',
+                        'secondary': '#D4A76A',
+                        'accent': '#C19A6B',
+                        'dark-bg': '#0A0A0A',
+                        'dark-card': '#1A1A1A',
+                        'light-bg': '#F5F5F5',
+                        'light-card': '#FFFFFF',
+                        'text-light': '#333333',
+                        'text-dark': '#F0F0F0',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'pulse-subtle': 'pulseSubtle 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        pulseSubtle: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.9' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .skill-chip {
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+        }
+        
+        .skill-chip:hover {
+            transform: translateY(-5px);
+            border-color: #8B4513;
+            box-shadow: 0 10px 25px -5px rgba(139, 69, 19, 0.2);
+        }
+        
+        .project-card {
+            transition: all 0.5s ease;
+            border: 1px solid #2A2A2A;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #8B4513;
+            box-shadow: 0 20px 40px -10px rgba(139, 69, 19, 0.3);
+        }
+        
+        .contact-icon {
+            transition: all 0.4s ease;
+        }
+        
+        .contact-icon:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #8B4513;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #8B4513, transparent);
+            margin: 4rem 0;
+        }
+        
+        .theme-toggle {
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+        
+        .cv-button {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            transition: all 0.4s ease;
+        }
+        
+        .cv-button:hover {
+            background: linear-gradient(135deg, #A0522D, #8B4513);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.4);
+        }
+        
+        .cv-button:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .cv-button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1A1A1A;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #8B4513;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A0522D;
+        }
+        
+        .light-mode ::-webkit-scrollbar-track {
+            background: #F0F0F0;
+        }
+        
+        .light-mode ::-webkit-scrollbar-thumb {
+            background: #C19A6B;
+        }
+        
+        .light-mode ::-webkit-scrollbar-thumb:hover {
+            background: #8B4513;
+        }
+        
+        .hero-glow {
+            background: radial-gradient(circle at center, rgba(139, 69, 19, 0.1) 0%, transparent 70%);
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .badge-light {
+            background: rgba(139, 69, 19, 0.1);
+            color: #8B4513;
+            border: 1px solid rgba(139, 69, 19, 0.2);
+        }
+        
+        .profile-pic {
+            border: 4px solid transparent;
+            background: linear-gradient(135deg, #8B4513, #A0522D) border-box;
+            border-radius: 50%;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+        }
+        
+        .profile-frame {
+            position: relative;
+        }
+        
+        .profile-frame::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            opacity: 0.2;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-text-dark font-inter">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-dark-bg/95 backdrop-blur-lg border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">
+                <span class="text-primary font-playfair">Sayan</span><span class="text-secondary">Sen</span>
+            </div>
+            <div class="hidden md:flex space-x-10">
+                <a href="#home" class="nav-link hover:text-secondary transition-colors">Home</a>
+                <a href="#about" class="nav-link hover:text-secondary transition-colors">About</a>
+                <a href="#skills" class="nav-link hover:text-secondary transition-colors">Expertise</a>
+                <a href="#projects" class="nav-link hover:text-secondary transition-colors">Projects</a>
+                <a href="#contact" class="nav-link hover:text-secondary transition-colors">Contact</a>
+            </div>
+            <button id="themeToggle" class="theme-toggle bg-dark-card p-3 rounded-full hover:bg-gray-800">
+                <i class="fas fa-moon text-secondary text-lg"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="container mx-auto px-6 py-20 animate-fade-in">
+        <div class="flex flex-col lg:flex-row items-center justify-between">
+            <div class="lg:w-3/5 mb-16 lg:mb-0">
+                <div class="inline-block mb-6">
+                    <span class="badge px-4 py-2 rounded-full text-sm">Software Developer</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-playfair font-bold mb-6 animate-slide-up leading-tight">
+                    Hi, I'm <span class="text-primary">Sayan Sen</span><br>
+                    Software Developer
+                </h1>
+                <p class="text-xl text-gray-300 mb-10 animate-slide-up" style="animation-delay: 0.2s; max-width: 600px;">
+                    I specialize in creating efficient, scalable software applications using modern technologies and clean architecture principles.
+                </p>
+                <div class="flex flex-wrap gap-6 animate-slide-up" style="animation-delay: 0.4s;">
+                    <a href="#contact" class="cv-button text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <i class="fas fa-paper-plane mr-2"></i>Start a Project
+                    </a>
+                    <a href="#projects" class="border border-primary/30 hover:border-primary text-primary font-medium py-4 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:bg-primary/10">
+                        <i class="fas fa-code mr-2"></i>View Work
+                    </a>
+                </div>
+                <div class="flex items-center mt-12 space-x-8">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-primary rounded-full mr-3 animate-pulse-subtle"></div>
+                        <span class="text-gray-400">Available for Projects</span>
+                    </div>
+                    <div class="h-6 w-px bg-gray-700"></div>
+                    <div class="flex items-center">
+                        <i class="fas fa-bolt text-secondary mr-3"></i>
+                        <span class="text-gray-400">Fast Delivery</span>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-2/5 flex justify-center">
+                <div class="profile-frame animate-float">
+                    <!-- Replace the src with your actual image URL -->
+                    <img src="PIC.jpg" 
+                         alt="Sayan Sen - Software Developer"
+                         class="profile-pic w-72 h-72 object-cover shadow-2xl">
+                    <div class="text-center mt-6">
+                        <div class="text-xl font-medium bg-dark-card px-6 py-3 rounded-full border border-gray-800 inline-block">
+                            <span class="text-secondary">Software</span> Developer
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container mx-auto px-6 py-16">
+        <div class="bg-dark-card rounded-2xl p-10 border border-gray-800">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3 flex justify-center">
+                    <div class="profile-frame">
+                        <img src="PIC.jpg" 
+                             alt="Sayan Sen"
+                             class="profile-pic w-64 h-64 object-cover shadow-2xl">
+                    </div>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="text-4xl font-playfair font-bold mb-6">About Me</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                        Passionate software developer with expertise in Java, Python, and modern web technologies. 
+                        I enjoy solving complex problems and building efficient, scalable applications that make a difference.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                        My approach combines technical expertise with creative problem-solving to deliver solutions 
+                        that exceed expectations. I believe in writing clean, maintainable code and following best practices.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap text-primary mr-3"></i>
+                            <span class="text-gray-300">B.Tech in CSE</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                            <span class="text-gray-300">Kolkata, India</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-code text-primary mr-3"></i>
+                            <span class="text-gray-300">3+ Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider container mx-auto"></div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="container mx-auto px-6 py-16">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-playfair font-bold mb-4">Technical Expertise</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Proficient in a diverse technology stack for building robust and scalable applications</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary">Java</div>
+                <div class="text-lg font-semibold mb-2">Core Java</div>
+                <div class="text-sm text-gray-400">OOP • Design Patterns • Collections</div>
+            </div>
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary">🐍</div>
+                <div class="text-lg font-semibold mb-2">Python</div>
+                <div class="text-sm text-gray-400">Scripting • Automation • Backend</div>
+            </div>
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary">🗄️</div>
+                <div class="text-lg font-semibold mb-2">MySQL</div>
+                <div class="text-sm text-gray-400">Database Design • Queries • Optimization</div>
+            </div>
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary"><i class="fab fa-html5"></i></div>
+                <div class="text-lg font-semibold mb-2">Frontend</div>
+                <div class="text-sm text-gray-400">HTML5 • CSS3 • JavaScript</div>
+            </div>
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary"><i class="fab fa-js"></i></div>
+                <div class="text-lg font-semibold mb-2">JavaScript</div>
+                <div class="text-sm text-gray-400">ES6+ • DOM Manipulation • AJAX</div>
+            </div>
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary"><i class="fab fa-git-alt"></i></div>
+                <div class="text-lg font-semibold mb-2">Git</div>
+                <div class="text-sm text-gray-400">Version Control • Collaboration</div>
+            </div>
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary">⚙️</div>
+                <div class="text-lg font-semibold mb-2">Java Swing</div>
+                <div class="text-sm text-gray-400">Desktop Applications • GUI Design</div>
+            </div>
+            <div class="skill-chip bg-dark-card p-8 rounded-xl flex flex-col items-center justify-center text-center border border-gray-800">
+                <div class="text-5xl mb-6 text-primary">🔗</div>
+                <div class="text-lg font-semibold mb-2">Socket Programming</div>
+                <div class="text-sm text-gray-400">Client-Server • Networking • TCP/IP</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container mx-auto px-6 py-16">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-playfair font-bold mb-4">Featured Projects</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Showcasing innovative solutions and technical implementations across various domains</p>
+        </div>
+        <div class="space-y-12">
+            <!-- Chatify Project -->
+            <div class="project-card bg-dark-card rounded-2xl overflow-hidden border border-gray-800">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-gradient-to-br from-primary-dark/20 to-dark-card p-8 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-7xl mb-6">💬</div>
+                            <h4 class="text-2xl font-bold">Real-time Communication</h4>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-10">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Java</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Socket Programming</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Multi-threading</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Swing UI</span>
+                        </div>
+                        <h3 class="text-3xl font-playfair font-bold mb-6 text-white">CHATIFY</h3>
+                        <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+                            Enterprise-grade real-time messaging platform supporting one-to-one and group communications with advanced features like message persistence, user authentication, and encrypted communication channels.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-black/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-secondary mb-2">Key Architecture</h5>
+                                <p class="text-gray-400 text-sm">Multi-threaded client-server model with non-blocking I/O operations and connection pooling for high concurrency handling.</p>
+                            </div>
+                            <div class="bg-black/30 p-4 rounded-lg">
+                                <h5 class="font-semibold text-secondary mb-2">Technical Highlights</h5>
+                                <p class="text-gray-400 text-sm">Implemented custom protocol design, message queuing, and offline message delivery with read receipts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorific Project -->
+            <div class="project-card bg-dark-card rounded-2xl overflow-hidden border border-gray-800">
+                <div class="md:flex">
+                    <div class="md:w-2/3 p-10">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Full Stack</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Node.js</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">MySQL</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">REST API</span>
+                        </div>
+                        <h3 class="text-3xl font-playfair font-bold mb-6 text-white">TUTORIFIC</h3>
+                        <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+                            Comprehensive educational platform connecting students with qualified tutors, featuring intelligent matching algorithms, scheduling systems, and progress tracking with analytics dashboard.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-primary/20 p-2 rounded mr-4">
+                                    <i class="fas fa-shield-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-white mb-1">Role-Based Access Control</h5>
+                                    <p class="text-gray-400 text-sm">Implemented comprehensive user authentication with JWT tokens and granular permission systems for students, tutors, and administrators.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary/20 p-2 rounded mr-4">
+                                    <i class="fas fa-chart-line text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-white mb-1">Advanced Analytics</h5>
+                                    <p class="text-gray-400 text-sm">Developed real-time dashboards with performance metrics, attendance tracking, and predictive analytics for student progress.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3 bg-gradient-to-bl from-primary-dark/20 to-dark-card p-8 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-7xl mb-6">👨‍🏫</div>
+                            <h4 class="text-2xl font-bold">Education Platform</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strike Mail Project -->
+            <div class="project-card bg-dark-card rounded-2xl overflow-hidden border border-gray-800">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-gradient-to-br from-primary-dark/20 to-dark-card p-8 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-7xl mb-6">📧</div>
+                            <h4 class="text-2xl font-bold">Bulk Email Solution</h4>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-10">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Java</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">SMTP</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Security</span>
+                            <span class="badge-light px-4 py-2 rounded-full text-sm font-medium">Multi-threading</span>
+                        </div>
+                        <h3 class="text-3xl font-playfair font-bold mb-6 text-white">STRIKE MAIL</h3>
+                        <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+                            High-performance bulk email delivery system supporting multiple email providers with enterprise-grade security, analytics, and delivery optimization features.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-black/30 p-4 rounded text-center">
+                                <div class="text-2xl font-bold text-primary mb-1">10K+</div>
+                                <div class="text-gray-400 text-sm">Emails per Hour</div>
+                            </div>
+                            <div class="bg-black/30 p-4 rounded text-center">
+                                <div class="text-2xl font-bold text-primary mb-1">99.8%</div>
+                                <div class="text-gray-400 text-sm">Delivery Rate</div>
+                            </div>
+                            <div class="bg-black/30 p-4 rounded text-center">
+                                <div class="text-2xl font-bold text-primary mb-1">256-bit</div>
+                                <div class="text-gray-400 text-sm">Encryption</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i class="fas fa-check-circle text-secondary mr-2"></i>
+                            <span class="text-sm">Supports Gmail, Outlook, Yahoo, and custom SMTP servers with TLS encryption</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-playfair font-bold mb-4">Get In Touch</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Let's discuss how we can collaborate to bring your software vision to life</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="bg-dark-card rounded-2xl p-10 border border-gray-800">
+                <div class="text-5xl mb-6 text-primary"><i class="fas fa-envelope-open-text"></i></div>
+                <h3 class="text-2xl font-bold mb-4">Email Me</h3>
+                <p class="text-gray-400 mb-6">For project inquiries and collaborations</p>
+                <a href="mailto:sensayan17032003@gmail.com" class="text-xl font-medium hover:text-secondary transition-colors">sensayan17032003@gmail.com</a>
+            </div>
+            
+            <div class="bg-dark-card rounded-2xl p-10 border border-gray-800">
+                <div class="text-5xl mb-6 text-primary"><i class="fas fa-phone-volume"></i></div>
+                <h3 class="text-2xl font-bold mb-4">Call Me</h3>
+                <p class="text-gray-400 mb-6">Available for technical discussions</p>
+                <a href="tel:+917980732038" class="text-xl font-medium hover:text-secondary transition-colors">+91 79807 32038</a>
+            </div>
+            
+            <div class="bg-dark-card rounded-2xl p-10 border border-gray-800">
+                <div class="text-5xl mb-6 text-primary"><i class="fas fa-network-wired"></i></div>
+                <h3 class="text-2xl font-bold mb-4">Connect</h3>
+                <p class="text-gray-400 mb-6">Professional networks and repositories</p>
+                <div class="space-y-4">
+                    <a href="https://www.linkedin.com/in/hoyosayansen" target="_blank" class="flex items-center text-gray-300 hover:text-secondary transition-colors">
+                        <i class="fab fa-linkedin text-primary mr-3"></i>
+                        <span>LinkedIn Profile</span>
+                    </a>
+                    <a href="https://github.com/SayanSen17" target="_blank" class="flex items-center text-gray-300 hover:text-secondary transition-colors">
+                        <i class="fab fa-github text-primary mr-3"></i>
+                        <span>GitHub Repository</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-20 bg-gradient-to-r from-dark-card to-primary-dark/10 rounded-2xl p-10 border border-gray-800">
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-playfair font-bold mb-4">Download Professional Profile</h3>
+                <p class="text-gray-400 max-w-2xl mx-auto">Access my comprehensive CV detailing technical expertise, project experience, and professional background</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <div class="text-6xl mr-6">📄</div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-2">Sayan Sen - CV</h4>
+                        <p class="text-gray-400">Updated: February 2024 | PDF Format</p>
+                    </div>
+                </div>
+                <button class="cv-button text-white font-bold py-5 px-10 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary/30">
+                    <i class="fas fa-download mr-3"></i>Download Complete CV
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-900 py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <div class="text-2xl font-bold mb-4">
+                        <span class="text-primary font-playfair">Sayan</span><span class="text-secondary">Sen</span>
+                    </div>
+                    <div class="text-gray-500">
+                        Software Developer & Technical Solutions Architect
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-8 mb-8 md:mb-0">
+                    <a href="#home" class="text-gray-400 hover:text-secondary transition-colors">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-secondary transition-colors">About</a>
+                    <a href="#skills" class="text-gray-400 hover:text-secondary transition-colors">Expertise</a>
+                    <a href="#projects" class="text-gray-400 hover:text-secondary transition-colors">Projects</a>
+                    <a href="#contact" class="text-gray-400 hover:text-secondary transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/in/hoyosayansen" target="_blank" class="contact-icon bg-gray-900 p-4 rounded-full">
+                        <i class="fab fa-linkedin-in text-gray-300 text-xl"></i>
+                    </a>
+                    <a href="https://github.com/SayanSen17" target="_blank" class="contact-icon bg-gray-900 p-4 rounded-full">
+                        <i class="fab fa-github text-gray-300 text-xl"></i>
+                    </a>
+                    <a href="mailto:sensayan17032003@gmail.com" class="contact-icon bg-gray-900 p-4 rounded-full">
+                        <i class="fas fa-envelope text-gray-300 text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2024 Sayan Sen. All rights reserved. | Crafted with precision and attention to detail</p>
+                <p class="mt-2 text-sm">Portfolio built with HTML5, TailwindCSS, and JavaScript</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const body = document.body;
+        
+        // Set default to dark mode
+        body.classList.add('bg-dark-bg', 'text-text-dark');
+        
+        themeToggle.addEventListener('click', function() {
+            if (body.classList.contains('bg-dark-bg')) {
+                // Switch to light mode
+                body.classList.remove('bg-dark-bg', 'text-text-dark');
+                body.classList.add('bg-light-bg', 'text-text-light', 'light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                themeIcon.classList.remove('text-secondary');
+                themeIcon.classList.add('text-primary');
+                
+                // Update all dark specific classes
+                document.querySelectorAll('.bg-dark-card').forEach(el => {
+                    el.classList.remove('bg-dark-card', 'border-gray-800');
+                    el.classList.add('bg-light-card', 'shadow-lg', 'border-gray-200');
+                });
+                
+                document.querySelectorAll('.text-gray-300').forEach(el => {
+                    el.classList.remove('text-gray-300');
+                    el.classList.add('text-gray-700');
+                });
+                
+                document.querySelectorAll('.text-gray-400').forEach(el => {
+                    el.classList.remove('text-gray-400');
+                    el.classList.add('text-gray-600');
+                });
+                
+                document.querySelectorAll('.bg-black\\/30').forEach(el => {
+                    el.classList.remove('bg-black/30');
+                   
